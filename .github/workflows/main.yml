@@ -1,0 +1,52 @@
+name: DENEMEEEE
+
+on:
+  workflow_dispatch:
+jobs:
+  Build:
+    name: BUILD
+    runs-on: ubuntu-latest
+    steps:
+       - name: Checkout repository
+         uses: actions/checkout@v4
+
+       - name: Boş dosya oluştur
+         run: touch deneme.apk
+
+       - name: Upload artifact
+         id: artifact-upload-step
+         uses: actions/upload-artifact@v4
+         with:
+           name: bismillahirrahmanirrahim.apk
+           path: ${{ github.workspace }}/deneme.apk
+
+       - name: Output artifact ID
+         run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+  
+       - name: Download artifact
+         id: artifact-download-step
+         uses: actions/download-artifact@v4
+         with:
+          artifact-ids: ${{ steps.artifact-upload-step.outputs.artifact-id }}
+         
+       - name: Display structure of downloaded files
+         run: ls -R         
+        
+       - name: DIAWI
+         id: diawi
+         uses: rnkdsh/action-upload-diawi@v1.5.9
+         with:
+          token: ${{ secrets.DIAWI_TOKEN }}
+          file: ./example2.apk
+
+       - name: APK İndirme Bilgisi
+         run: |
+          echo ""
+          echo "==========================================="
+          echo "🚀  ✅ *YENİ UYGULAMA DERLEMESİ HAZIR!*"
+          echo ""
+          echo "🔗  APK Dosyasını buradan indirebilirsin:"
+          echo ""
+          echo "    👉  ${{ steps.diawi.outputs.url }}  "
+          echo ""
+          echo "==========================================="
