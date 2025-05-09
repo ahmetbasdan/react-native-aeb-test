@@ -37,7 +37,7 @@ jobs:
          uses: rnkdsh/action-upload-diawi@v1.5.9
          with:
           token: ${{ secrets.DIAWI_TOKEN }}
-          file: ./example2.apk
+          file: ./bismillahirrahmanirrahim.apk
 
        - name: APK İndirme Bilgisi
          run: |
